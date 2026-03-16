@@ -13,16 +13,21 @@
 //       saves order to Firestore `orders`,
 //       appends row to Google Sheet (with auto-headers if sheet is empty)
 //
-// Required environment variables (set in Netlify dashboard):
+// Recommended environment variables (set in Netlify dashboard):
+//   SERVICE_ACCOUNT_JSON          – single JSON string containing
+//                                   { project_id, client_email, private_key }
+//                                   (literal \n sequences accepted)
+//
+// Legacy environment variables still supported for backwards compatibility:
 //   FIREBASE_PROJECT_ID
 //   FIREBASE_CLIENT_EMAIL
-//   FIREBASE_PRIVATE_KEY          – literal \n sequences accepted
+//   FIREBASE_PRIVATE_KEY
 //   CLOUDINARY_CLOUD_NAME
 //   CLOUDINARY_API_KEY
 //   CLOUDINARY_API_SECRET
 //   GOOGLE_SHEET_ID
 //   GOOGLE_SERVICE_ACCOUNT_EMAIL
-//   GOOGLE_PRIVATE_KEY            – literal \n sequences accepted
+//   GOOGLE_PRIVATE_KEY
 
 const admin      = require("firebase-admin");
 const cloudinary = require("cloudinary").v2;
@@ -33,6 +38,38 @@ const { JWT }               = require("google-auth-library");
 
 /** Restore real newlines from Netlify env var strings. */
 const fixKey = (raw) => (raw ? raw.replace(/\\n/g, "\n") : undefined);
+
+let parsedServiceAccount = null;
+
+/**
+ * Resolve service-account credentials from a single env var first, then
+ * gracefully fall back to legacy per-service env vars.
+ */
+function getServiceAccount() {
+  if (parsedServiceAccount) return parsedServiceAccount;
+
+  if (process.env.SERVICE_ACCOUNT_JSON) {
+    try {
+      const credentials = JSON.parse(process.env.SERVICE_ACCOUNT_JSON);
+      parsedServiceAccount = {
+        projectId: credentials.project_id,
+        clientEmail: credentials.client_email,
+        privateKey: fixKey(credentials.private_key),
+      };
+      return parsedServiceAccount;
+    } catch (err) {
+      throw new Error(`Invalid SERVICE_ACCOUNT_JSON: ${err.message}`);
+    }
+  }
+
+  parsedServiceAccount = {
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL || process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    privateKey: fixKey(process.env.FIREBASE_PRIVATE_KEY || process.env.GOOGLE_PRIVATE_KEY),
+  };
+
+  return parsedServiceAccount;
+}
 
 /** Return a plain JSON response. */
 const respond = (statusCode, body) => ({
@@ -46,18 +83,18 @@ const respond = (statusCode, body) => ({
 function getFirebaseApp() {
   if (admin.apps.length > 0) return admin.apps[0];
 
-  const privateKey = fixKey(process.env.FIREBASE_PRIVATE_KEY);
+  const { projectId, clientEmail, privateKey } = getServiceAccount();
 
-  if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !privateKey) {
+  if (!projectId || !clientEmail || !privateKey) {
     throw new Error(
-      "Missing Firebase env vars: FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY"
+      "Missing credentials. Set SERVICE_ACCOUNT_JSON (recommended) or FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY"
     );
   }
 
   return admin.initializeApp({
     credential: admin.credential.cert({
-      projectId:   process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      projectId,
+      clientEmail,
       privateKey,
     }),
   });
@@ -117,16 +154,16 @@ const SHEET_HEADERS = [
 ];
 
 async function getFirstSheet() {
-  const privateKey = fixKey(process.env.GOOGLE_PRIVATE_KEY);
+  const { clientEmail, privateKey } = getServiceAccount();
 
-  if (!process.env.GOOGLE_SHEET_ID || !process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !privateKey) {
+  if (!process.env.GOOGLE_SHEET_ID || !clientEmail || !privateKey) {
     throw new Error(
-      "Missing Google Sheets env vars: GOOGLE_SHEET_ID, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY"
+      "Missing Google Sheets credentials. Set GOOGLE_SHEET_ID plus SERVICE_ACCOUNT_JSON (recommended) or GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_PRIVATE_KEY"
     );
   }
 
   const auth = new JWT({
-    email:  process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    email:  clientEmail,
     key:    privateKey,
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
