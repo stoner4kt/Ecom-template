@@ -8,9 +8,8 @@
 //
 //   POST /save-data?action=checkout
 //     Body: { orderId, customerName, totalAmount, items[], whatsapp,
-//             email, address, paymentProof (Base64) }
-//     → Uploads payment proof to Cloudinary (`payments/` folder),
-//       saves order to Firestore `orders`,
+//             email, address, notes, [receiptUrl] }
+//     → Saves order to Firestore `orders`,
 //       appends row to Google Sheet (with auto-headers if sheet is empty)
 //
 // Recommended environment variables (set in Netlify dashboard):
@@ -149,7 +148,7 @@ const SHEET_HEADERS = [
   "Order_ID",
   "Customer_Name",
   "Total_Amount",
-  "Payment_Proof_URL",
+  "Receipt_URL",
   "Timestamp",
 ];
 
@@ -173,7 +172,7 @@ async function getFirstSheet() {
   return doc.sheetsByIndex[0];
 }
 
-async function appendOrderToSheet({ orderId, customerName, totalAmount, paymentProofUrl }) {
+async function appendOrderToSheet({ orderId, customerName, totalAmount, receiptUrl = "" }) {
   const sheet = await getFirstSheet();
 
   // Try loading the existing header row; throws if the sheet is completely empty.
@@ -194,7 +193,7 @@ async function appendOrderToSheet({ orderId, customerName, totalAmount, paymentP
     Order_ID:          orderId        ?? "",
     Customer_Name:     customerName   ?? "",
     Total_Amount:      totalAmount    ?? "",
-    Payment_Proof_URL: paymentProofUrl ?? "",
+    Receipt_URL:      receiptUrl      ?? "",
     Timestamp:         new Date().toISOString(),
   });
 }
@@ -278,7 +277,8 @@ async function handleCheckout(data) {
     whatsapp     = "",
     email        = "",
     address      = "",
-    paymentProof,
+    notes        = "",
+    receiptUrl   = "",
   } = data;
 
   // --- Validation ---
@@ -292,27 +292,11 @@ async function handleCheckout(data) {
   if (totalAmount === undefined || totalAmount === null || isNaN(Number(totalAmount))) {
     errors.push("'totalAmount' is required and must be a number.");
   }
-  if (!paymentProof || typeof paymentProof !== "string") {
-    errors.push("'paymentProof' is required and must be a Base64-encoded string.");
-  }
   if (errors.length) {
     return respond(400, { error: "Validation failed.", details: errors });
   }
 
-  // --- Step 1: Upload payment proof to Cloudinary (into `payments/` folder) ---
-  let paymentProofUrl;
-  try {
-    paymentProofUrl = await uploadToCloudinary(paymentProof, "payments");
-    console.log("[Cloudinary] Payment proof uploaded:", paymentProofUrl);
-  } catch (err) {
-    console.error("[Cloudinary Error - Payment Proof]", err.message);
-    return respond(502, {
-      error:   "Payment proof upload to Cloudinary failed.",
-      details: err.message,
-    });
-  }
-
-  // --- Step 2: Save order to Firestore (fatal if this fails) ---
+  // --- Step 1: Save order to Firestore (fatal if this fails) ---
   let firestoreDocId;
   try {
     getFirebaseApp();
@@ -325,7 +309,8 @@ async function handleCheckout(data) {
       whatsapp:        String(whatsapp).trim(),
       email:           String(email).trim(),
       address:         String(address).trim(),
-      paymentProofUrl,
+      notes:           String(notes).trim(),
+      receiptUrl:      String(receiptUrl || "").trim(),
       status:          "pending",
       createdAt:       admin.firestore.FieldValue.serverTimestamp(),
     });
@@ -340,10 +325,10 @@ async function handleCheckout(data) {
     });
   }
 
-  // --- Step 3: Append row to Google Sheet (non-fatal) ---
+  // --- Step 2: Append row to Google Sheet (non-fatal) ---
   let sheetsWarning = null;
   try {
-    await appendOrderToSheet({ orderId, customerName, totalAmount, paymentProofUrl });
+    await appendOrderToSheet({ orderId, customerName, totalAmount, receiptUrl });
     console.log("[Google Sheets] Order row appended for:", orderId);
   } catch (err) {
     // A Sheets failure must NOT block a confirmed order.
@@ -357,7 +342,7 @@ async function handleCheckout(data) {
   const responseBody = {
     message:     "Order placed successfully.",
     firestoreId: firestoreDocId,
-    paymentProofUrl,
+    orderId,
   };
 
   if (sheetsWarning) {
