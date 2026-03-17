@@ -32,8 +32,6 @@
     .field { width: 100%; border: 1.5px solid rgba(45,106,45,0.2); border-radius: 12px; padding: 12px 16px; font-size: 0.9rem; background: white; transition: border 0.2s; outline: none; }
     .field:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,106,45,0.1); }
     .card { background: white; border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(45,106,45,0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-    .upload-zone { border: 2px dashed rgba(45,106,45,0.3); border-radius: 16px; padding: 2rem; text-align: center; transition: all 0.2s; cursor: pointer; }
-    .upload-zone:hover, .upload-zone.drag { border-color: var(--yellow); background: rgba(245,197,24,0.05); }
     .step-badge { width: 32px; height: 32px; border-radius: 50%; background: var(--yellow); color: #1C1C1C; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     #success-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: none; align-items: center; justify-content: center; }
     #success-overlay.show { display: flex; }
@@ -60,15 +58,15 @@
 <div id="success-overlay">
   <div class="bg-white rounded-3xl p-10 text-center max-w-md mx-4 shadow-2xl">
     <div class="text-6xl mb-4">🎉</div>
-    <h2 class="text-3xl font-display text-primary mb-3">Order Received!</h2>
-    <p class="text-text-mid mb-6">Your order has been submitted. We'll confirm once payment reflects. We'll reach out via WhatsApp.</p>
+    <h2 class="text-3xl font-display text-primary mb-3">Thank you for your order!</h2>
+    <p id="success-message" class="text-text-mid mb-6">Please message us on WhatsApp <strong>0724841636</strong> or Telegram <strong>@herbalhights</strong> with your receipt or order number for payment and delivery details.</p>
     <a href="products.html" class="btn-primary inline-block px-8 py-3">Continue Shopping</a>
   </div>
 </div>
 
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-5xl">
   <h1 class="text-3xl sm:text-4xl font-display text-primary mb-2">Checkout</h1>
-  <p class="text-text-mid mb-8">Complete your order by filling in your details and uploading proof of payment.</p>
+  <p class="text-text-mid mb-8">Complete your order and download your receipt. We will finalize payment and delivery over chat.</p>
 
   <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
@@ -122,64 +120,38 @@
       </div>
     </div>
 
-    <!-- RIGHT: Payment & Upload (2 cols) -->
+    <!-- RIGHT: Receipt & Next Steps (2 cols) -->
     <div class="lg:col-span-2 space-y-6">
-
-      <!-- Payment Info -->
       <div class="card">
         <h2 class="text-xl font-display text-primary mb-4 flex items-center gap-2">
-          <span class="step-badge">3</span> Payment Details
+          <span class="step-badge">3</span> Receipt Required
         </h2>
-        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-sm space-y-1">
-          <p class="font-bold text-primary mb-2">Bank Transfer / EFT:</p>
-          <p><span class="font-semibold">Bank:</span> Capitec</p>
-          <p><span class="font-semibold">Account Holder:</span> Herbal Hights</p>
-          <p><span class="font-semibold">Account Number:</span> <span class="font-mono font-bold">YOUR_ACC_NUMBER</span></p>
-          <p><span class="font-semibold">Branch Code:</span> 470010</p>
-          <p class="mt-2 pt-2 border-t border-yellow-300"><span class="font-semibold">CapiPay Number:</span> YOUR_NUMBER</p>
-          <div class="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p class="font-bold text-red-700">Reference: <span id="payment-ref">Use your WhatsApp number</span></p>
-          </div>
-        </div>
-        <p class="text-xs text-text-mid mt-3">Orders are processed once payment reflects. Use your WhatsApp number as the payment reference.</p>
-      </div>
-
-      <!-- Proof of Payment Upload -->
-      <div class="card">
-        <h2 class="text-xl font-display text-primary mb-4 flex items-center gap-2">
-          <span class="step-badge">4</span> Proof of Payment
-        </h2>
-        <p class="text-sm text-text-mid mb-4">Upload a screenshot or photo of your payment confirmation. This is <strong>required</strong> before placing your order.</p>
-
-        <div id="upload-zone" class="upload-zone" onclick="document.getElementById('pop-file').click()">
-          <input type="file" id="pop-file" accept="image/*,.pdf" class="hidden" onchange="handleFileSelect(this)">
-          <div id="upload-placeholder">
-            <div class="text-4xl mb-3">📎</div>
-            <p class="font-semibold text-text-dark">Click to upload proof of payment</p>
-            <p class="text-xs text-text-mid mt-1">Accepted: JPG, PNG, PDF (max 10MB)</p>
-          </div>
-          <div id="upload-preview" class="hidden">
-            <img id="preview-img" src="" alt="Preview" class="max-h-32 mx-auto rounded-lg mb-2">
-            <p id="preview-name" class="text-sm font-medium text-primary"></p>
-            <button onclick="clearFile(event)" class="text-xs text-red-500 hover:text-red-700 mt-1">Remove ✕</button>
-          </div>
-        </div>
-        <div id="upload-progress" class="mt-3 hidden">
-          <div class="flex justify-between text-xs text-text-mid mb-1"><span>Uploading…</span><span id="upload-pct">0%</span></div>
-          <div class="w-full bg-gray-200 rounded-full h-2"><div id="upload-bar" class="h-2 rounded-full transition-all" style="background: var(--yellow); width: 0%"></div></div>
+        <p class="text-sm text-text-mid mb-3">A PDF receipt will be generated in your browser after checkout. You must download it and share it with us to confirm payment and delivery details.</p>
+        <div class="rounded-xl border border-primary/15 bg-bg-card p-4 text-sm text-text-mid space-y-2">
+          <p><strong>WhatsApp:</strong> <a class="text-primary underline" href="https://wa.me/27724841636" target="_blank">0724841636</a></p>
+          <p><strong>Telegram:</strong> <a class="text-primary underline" href="https://t.me/herbalhights" target="_blank">@herbalhights</a></p>
+          <p class="text-xs">Share your receipt or order number for payment methods and delivery instructions.</p>
         </div>
       </div>
 
-      <!-- Submit Button -->
+      <div class="card">
+        <h3 class="text-base font-display text-primary mb-3">Stay connected</h3>
+        <div class="flex flex-wrap gap-2">
+          <a href="https://t.me/herbalhights" target="_blank" class="btn-primary px-4 py-2 text-xs">Follow Telegram</a>
+          <a href="https://chat.whatsapp.com/DjXA45eYQIoGeIkDEIbuNe?mode=gi_t" target="_blank" class="btn-primary px-4 py-2 text-xs">Join WhatsApp Group</a>
+        </div>
+      </div>
+
       <button id="submit-order-btn" onclick="submitOrder()" class="btn-primary w-full py-4 text-base" disabled>
-        Place Order
+        Place Order & Download Receipt
       </button>
       <p id="submit-error" class="text-center text-red-500 text-sm hidden"></p>
-
       <p class="text-xs text-text-mid text-center">By placing your order you confirm you are 18+ and comply with local laws.</p>
     </div>
   </div>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -190,8 +162,6 @@
 
 <script>
   let cart = JSON.parse(localStorage.getItem('hh_cart') || '[]');
-  let selectedFile = null;
-  let popImageUrl = null;
 
   // Render order summary
   function renderOrder() {
@@ -213,73 +183,54 @@
     document.getElementById('order-total').textContent = 'R' + total;
   }
 
-  // File handling
-  function handleFileSelect(input) {
-    if (!input.files || !input.files[0]) return;
-    selectedFile = input.files[0];
-    if (selectedFile.size > 10 * 1024 * 1024) {
-      alert('File too large. Max 10MB.'); selectedFile = null; return;
-    }
-    document.getElementById('upload-placeholder').classList.add('hidden');
-    document.getElementById('upload-preview').classList.remove('hidden');
-    document.getElementById('preview-name').textContent = selectedFile.name;
-    if (selectedFile.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = e => { document.getElementById('preview-img').src = e.target.result; document.getElementById('preview-img').classList.remove('hidden'); };
-      reader.readAsDataURL(selectedFile);
-    } else {
-      document.getElementById('preview-img').classList.add('hidden');
-    }
-    checkFormReady();
-  }
-
-  function clearFile(e) {
-    e.stopPropagation();
-    selectedFile = null;
-    popImageUrl = null;
-    document.getElementById('pop-file').value = '';
-    document.getElementById('upload-placeholder').classList.remove('hidden');
-    document.getElementById('upload-preview').classList.add('hidden');
-    checkFormReady();
-  }
-
-  // Drag and drop
-  const zone = document.getElementById('upload-zone');
-  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
-  zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
-  zone.addEventListener('drop', e => {
-    e.preventDefault(); zone.classList.remove('drag');
-    const files = e.dataTransfer.files;
-    if (files[0]) { document.getElementById('pop-file').files = files; handleFileSelect(document.getElementById('pop-file')); }
-  });
-
   function checkFormReady() {
     const name = document.getElementById('cust-name').value.trim();
     const wa = document.getElementById('cust-whatsapp').value.trim();
     const email = document.getElementById('cust-email').value.trim();
     const addr = document.getElementById('cust-address').value.trim();
-    const hasFile = selectedFile !== null;
     const hasCart = cart.length > 0;
-    document.getElementById('submit-order-btn').disabled = !(name && wa && email && addr && hasFile && hasCart);
+    document.getElementById('submit-order-btn').disabled = !(name && wa && email && addr && hasCart);
   }
 
   ['cust-name','cust-whatsapp','cust-email','cust-address'].forEach(id => {
     document.getElementById(id).addEventListener('input', checkFormReady);
   });
 
-  // Update payment ref when WhatsApp entered
-  document.getElementById('cust-whatsapp').addEventListener('input', e => {
-    document.getElementById('payment-ref').textContent = e.target.value || 'Use your WhatsApp number';
-  });
 
-  /** Convert a File object to a Base64 data-URI string. */
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload  = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error('Failed to read file.'));
-      reader.readAsDataURL(file);
+  async function generateReceiptPdf({ orderId, totalAmount }) {
+    const { jsPDF } = window.jspdf || {};
+    if (!jsPDF) throw new Error('Receipt generator failed to load. Please refresh and try again.');
+    const doc = new jsPDF();
+    const name = document.getElementById('cust-name').value.trim();
+    const wa = document.getElementById('cust-whatsapp').value.trim();
+    const date = new Date().toLocaleString('en-ZA');
+
+    doc.setFontSize(18);
+    doc.text('Herbal Hights Receipt', 14, 18);
+    doc.setFontSize(11);
+    doc.text(`Order #: ${orderId}`, 14, 28);
+    doc.text(`Date: ${date}`, 14, 34);
+    doc.text(`Customer: ${name}`, 14, 40);
+    doc.text(`WhatsApp: ${wa}`, 14, 46);
+
+    let y = 58;
+    doc.text('Items', 14, y);
+    y += 6;
+    (cart || []).forEach((item) => {
+      const line = `${item.name} x${item.qty} @ R${item.price}`;
+      doc.text(line.substring(0, 130), 14, y);
+      doc.text(`R${item.price * item.qty}`, 180, y, { align: 'right' });
+      y += 6;
     });
+
+    y += 4;
+    doc.setFontSize(12);
+    doc.text(`Total: R${totalAmount}`, 180, y, { align: 'right' });
+    y += 10;
+    doc.setFontSize(10);
+    doc.text('Send this receipt/order number to WhatsApp 0724841636 or Telegram @herbalhights.', 14, y);
+
+    doc.save(`${orderId}-receipt.pdf`);
   }
 
   async function submitOrder() {
@@ -287,27 +238,14 @@
     const errEl = document.getElementById('submit-error');
     errEl.classList.add('hidden');
     btn.disabled    = true;
-    btn.textContent = 'Uploading proof of payment…';
+    btn.textContent = 'Submitting order…';
 
     try {
-      if (!selectedFile) throw new Error('Please upload proof of payment.');
-
-      // Convert the payment proof image to Base64
-      const paymentProofBase64 = await fileToBase64(selectedFile);
-
-      // Show progress feedback
-      const progressBar = document.getElementById('upload-bar');
-      const progressPct = document.getElementById('upload-pct');
-      document.getElementById('upload-progress').classList.remove('hidden');
-      progressBar.style.width = '40%';
-      progressPct.textContent = 'Uploading…';
-
-      const orderId      = 'ORD-' + Date.now();
+      const orderId      = 'HH-' + Date.now();
       const customerName = document.getElementById('cust-name').value.trim();
       const totalAmount  = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
-      btn.textContent = 'Placing order…';
-      progressBar.style.width = '70%';
+      btn.textContent = 'Saving order…';
 
       // Send everything to the Netlify function
       const res  = await fetch('/.netlify/functions/save-data?action=checkout', {
@@ -321,16 +259,14 @@
           whatsapp:     document.getElementById('cust-whatsapp').value.trim(),
           email:        document.getElementById('cust-email').value.trim(),
           address:      document.getElementById('cust-address').value.trim(),
-          notes:        document.getElementById('cust-notes').value.trim(),
-          paymentProof: paymentProofBase64,
+          notes:        document.getElementById('cust-notes').value.trim()
         }),
       });
 
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Order submission failed.');
 
-      progressBar.style.width = '100%';
-      progressPct.textContent = '100%';
+      await generateReceiptPdf({ orderId, totalAmount });
 
       if (json.warning) {
         console.warn('[Checkout]', json.warning);
@@ -338,6 +274,7 @@
 
       // Clear cart and show success
       localStorage.removeItem('hh_cart');
+      document.getElementById('success-message').innerHTML = `Please message us on WhatsApp <strong>0724841636</strong> or Telegram <strong>@herbalhights</strong> with your receipt or order number <strong>${orderId}</strong> for payment methods and delivery details.`;
       document.getElementById('success-overlay').classList.add('show');
 
     } catch (e) {
@@ -345,7 +282,7 @@
       errEl.textContent = 'Failed to submit order: ' + e.message;
       errEl.classList.remove('hidden');
       btn.disabled    = false;
-      btn.textContent = 'Place Order';
+      btn.textContent = 'Place Order & Download Receipt';
     }
   }
 
