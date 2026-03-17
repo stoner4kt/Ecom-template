@@ -10,44 +10,45 @@
       theme: {
         extend: {
           colors: {
-            primary: "#2D6A2D", "primary-dark": "#1a4a1a",
-            secondary: "#F5C518", "bg-light": "#FFFEF5", "bg-card": "#F9FBF2",
-            "text-dark": "#1C1C1C", "text-mid": "#4A4A4A",
+            primary: "#7CFF4D", "primary-dark": "#53d728",
+            secondary: "#F5C542", "bg-dark": "#0A0A0A", "bg-card": "#111111", "bg-elevated": "#171717",
+            "text-light": "#F5F5F5", "text-mid": "#B3B3B3",
           },
-          fontFamily: { display: ["'Playfair Display'", "serif"], body: ["'DM Sans'", "sans-serif"] }
+          fontFamily: { display: ["'Montserrat'", "sans-serif"], body: ["'Inter'", "sans-serif"] }
         }
       }
     };
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root { --green: #2D6A2D; --yellow: #F5C518; }
-    body { background: #FFFEF5; font-family: 'DM Sans', sans-serif; }
-    h1,h2,h3 { font-family: 'Playfair Display', serif; }
-    .navbar { background: rgba(255,254,245,0.95); backdrop-filter: blur(12px); border-bottom: 2px solid var(--yellow); }
-    .btn-primary { background: var(--yellow); color: #1C1C1C; font-weight: 700; border-radius: 999px; transition: all 0.2s; border: 2px solid var(--yellow); }
-    .btn-primary:hover { background: #FFD740; }
-    .btn-primary:disabled { background: #d1d5db; border-color: #d1d5db; color: #9ca3af; cursor: not-allowed; }
-    .field { width: 100%; border: 1.5px solid rgba(45,106,45,0.2); border-radius: 12px; padding: 12px 16px; font-size: 0.9rem; background: white; transition: border 0.2s; outline: none; }
-    .field:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,106,45,0.1); }
-    .card { background: white; border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(45,106,45,0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-    .step-badge { width: 32px; height: 32px; border-radius: 50%; background: var(--yellow); color: #1C1C1C; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    #success-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: none; align-items: center; justify-content: center; }
+    :root { --neon:#7CFF4D; --amber:#F5C542; --line:rgba(255,255,255,0.1); }
+    body { background:#0A0A0A; color:#F5F5F5; font-family:'Inter',sans-serif; }
+    h1,h2,h3 { font-family:'Montserrat',sans-serif; }
+    .navbar { background: rgba(8,8,8,0.75); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .brand-logo { height: 2.35rem; width: auto; max-height: 50px; object-fit: contain; display: block; }
+    .brand-wrap { padding: 0.35rem 0.55rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
+    .btn-primary { background: var(--neon); color: #070707; font-weight: 700; border-radius: 999px; transition: all 0.3s ease-in-out; border: 1px solid rgba(124,255,77,0.85); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 20px rgba(124,255,77,0.3); }
+    .btn-primary:disabled { background: #3a3a3a; border-color: #3a3a3a; color: #8f8f8f; cursor: not-allowed; }
+    .field { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; font-size: 0.9rem; background: #151515; transition: border 0.3s ease-in-out; outline: none; color: #f4f4f4; }
+    .field:focus { border-color: rgba(124,255,77,0.6); box-shadow: 0 0 0 3px rgba(124,255,77,0.12); }
+    .card { background: rgba(17,17,17,0.92); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--line); }
+    .step-badge { width: 32px; height: 32px; border-radius: 50%; background: rgba(124,255,77,0.2); color: var(--neon); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    #success-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.76); z-index: 100; display: none; align-items: center; justify-content: center; }
     #success-overlay.show { display: flex; }
   </style>
 </head>
-<body class="text-text-dark">
+<body class="text-text-light">
 
 <!-- NAVBAR -->
 <header class="navbar sticky top-0 z-30">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <a href="index.html" class="flex items-center gap-2">
-        <span class="text-2xl">🌿</span>
-        <span class="font-display text-xl font-bold text-primary">Herbal Hights</span>
+      <a href="index.html" class="flex items-center gap-2 brand-wrap">
+        <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="brand-logo">
       </a>
-      <a href="products.html" class="border border-primary/30 text-primary rounded-full px-4 py-2 text-sm font-medium hover:bg-primary hover:text-white transition">
+      <a href="products.html" class="border border-primary/30 text-primary rounded-full px-4 py-2 text-sm font-medium hover:bg-primary hover:text-black transition duration-300">
         ← Back to Products
       </a>
     </div>
@@ -56,7 +57,7 @@
 
 <!-- SUCCESS OVERLAY -->
 <div id="success-overlay">
-  <div class="bg-white rounded-3xl p-10 text-center max-w-md mx-4 shadow-2xl">
+  <div class="card rounded-3xl p-10 text-center max-w-md mx-4">
     <div class="text-6xl mb-4">🎉</div>
     <h2 class="text-3xl font-display text-primary mb-3">Thank you for your order!</h2>
     <p id="success-message" class="text-text-mid mb-6">Please message us on WhatsApp <strong>0724841636</strong> or Telegram <strong>@herbalhights</strong> with your receipt or order number for payment and delivery details.</p>
@@ -127,7 +128,7 @@
           <span class="step-badge">3</span> Receipt Required
         </h2>
         <p class="text-sm text-text-mid mb-3">A PDF receipt will be generated in your browser after checkout. You must download it and share it with us to confirm payment and delivery details.</p>
-        <div class="rounded-xl border border-primary/15 bg-bg-card p-4 text-sm text-text-mid space-y-2">
+        <div class="rounded-xl border border-primary/15 bg-bg-elevated p-4 text-sm text-text-mid space-y-2">
           <p><strong>WhatsApp:</strong> <a class="text-primary underline" href="https://wa.me/27724841636" target="_blank">0724841636</a></p>
           <p><strong>Telegram:</strong> <a class="text-primary underline" href="https://t.me/herbalhights" target="_blank">@herbalhights</a></p>
           <p class="text-xs">Share your receipt or order number for payment methods and delivery instructions.</p>
