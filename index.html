@@ -73,6 +73,8 @@
     .hero-pattern { position: absolute; inset: 0; opacity: 0.3; background: radial-gradient(circle at 20% 40%, rgba(255,255,255,0.04) 0, transparent 55%); }
 
     .navbar { background: rgba(8,8,8,0.75); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .brand-logo { height: 2.4rem; width: auto; max-height: 50px; object-fit: contain; display: block; }
+    .brand-wrap { padding: 0.35rem 0.6rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
     .glass-card, .product-card, .review-card { background: rgba(17,17,17,0.9); border: 1px solid var(--line); border-radius: 18px; box-shadow: none; }
     .product-card { overflow: hidden; transition: all 0.3s ease-in-out; cursor: pointer; }
     .product-card:hover { transform: translateY(-6px); border-color: rgba(124,255,77,0.45); }
@@ -120,8 +122,8 @@
 
 <!-- MOBILE MENU -->
 <div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-bg-elevated z-50 p-6 shadow-2xl">
-  <div class="flex justify-between items-center mb-8">
-    <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="h-10 w-auto max-h-[50px]">
+  <div class="flex justify-between items-center mb-8 brand-wrap">
+    <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="brand-logo">
     <button onclick="closeMenu()" class="text-text-light text-2xl">✕</button>
   </div>
   <nav class="space-y-4">
@@ -143,8 +145,8 @@
 <header class="navbar sticky top-0 z-30">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
-        <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="h-10 sm:h-11 w-auto max-h-[50px]">
+      <a href="index.html" class="flex items-center gap-2 flex-shrink-0 brand-wrap">
+        <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="brand-logo">
       </a>
 
       <nav class="hidden lg:flex gap-8">
@@ -304,13 +306,12 @@
 </section>
 
 <!-- FOOTER -->
-<footer style="background: var(--green-dark);" class="pt-12 pb-6">
+<footer class="pt-12 pb-6 bg-[#080808] border-t border-white/10">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-2xl">🌿</span>
-          <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="h-10 w-auto max-h-[50px]">
+        <div class="flex items-center gap-2 mb-3 brand-wrap w-fit">
+          <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="brand-logo">
         </div>
         <p class="text-white/60 text-sm">Elevated experiences, every time.</p>
       </div>

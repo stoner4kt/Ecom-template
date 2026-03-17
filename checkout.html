@@ -26,6 +26,8 @@
     body { background:#0A0A0A; color:#F5F5F5; font-family:'Inter',sans-serif; }
     h1,h2,h3 { font-family:'Montserrat',sans-serif; }
     .navbar { background: rgba(8,8,8,0.75); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .brand-logo { height: 2.35rem; width: auto; max-height: 50px; object-fit: contain; display: block; }
+    .brand-wrap { padding: 0.35rem 0.55rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
     .btn-primary { background: var(--neon); color: #070707; font-weight: 700; border-radius: 999px; transition: all 0.3s ease-in-out; border: 1px solid rgba(124,255,77,0.85); }
     .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 20px rgba(124,255,77,0.3); }
     .btn-primary:disabled { background: #3a3a3a; border-color: #3a3a3a; color: #8f8f8f; cursor: not-allowed; }
@@ -43,8 +45,8 @@
 <header class="navbar sticky top-0 z-30">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <a href="index.html" class="flex items-center gap-2">
-        <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="h-10 w-auto max-h-[50px]">
+      <a href="index.html" class="flex items-center gap-2 brand-wrap">
+        <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="brand-logo">
       </a>
       <a href="products.html" class="border border-primary/30 text-primary rounded-full px-4 py-2 text-sm font-medium hover:bg-primary hover:text-black transition duration-300">
         ← Back to Products
