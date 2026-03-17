@@ -11,20 +11,19 @@
       theme: {
         extend: {
           colors: {
-            primary: "#2D6A2D",
-            "primary-dark": "#1a4a1a",
-            "primary-light": "#3d8c3d",
-            secondary: "#F5C518",
-            "secondary-dark": "#d4a800",
-            "secondary-light": "#FFD740",
-            "bg-light": "#FFFEF5",
-            "bg-card": "#F9FBF2",
-            "text-dark": "#1C1C1C",
-            "text-mid": "#4A4A4A",
+            primary: "#7CFF4D",
+            "primary-dark": "#53d728",
+            "primary-soft": "#7CFF4D1A",
+            secondary: "#F5C542",
+            "bg-dark": "#0A0A0A",
+            "bg-card": "#111111",
+            "bg-elevated": "#171717",
+            "text-light": "#F5F5F5",
+            "text-mid": "#B3B3B3",
           },
           fontFamily: {
-            display: ["'Playfair Display'", "serif"],
-            body: ["'DM Sans'", "sans-serif"],
+            display: ["'Montserrat'", "sans-serif"],
+            body: ["'Inter'", "sans-serif"],
           }
         }
       }
@@ -32,150 +31,84 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --green: #2D6A2D;
-      --green-dark: #1a4a1a;
-      --yellow: #F5C518;
-      --yellow-light: #FFD740;
+      --bg: #0A0A0A;
+      --card: #111111;
+      --elevated: #171717;
+      --neon: #7CFF4D;
+      --amber: #F5C542;
+      --line: rgba(255,255,255,0.1);
     }
 
-    body { background-color: #FFFEF5; font-family: 'DM Sans', sans-serif; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
-
-    /* Age Gate */
-    #age-gate {
-      position: fixed; inset: 0;
-      background: linear-gradient(135deg, #1a4a1a 0%, #2D6A2D 50%, #1a4a1a 100%);
-      z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.5s ease;
+    body {
+      background: var(--bg);
+      color: #F5F5F5;
+      font-family: 'Inter', sans-serif;
+      position: relative;
     }
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      width: 45vw;
+      height: 45vw;
+      border-radius: 999px;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    body::before { top: -12rem; left: -10rem; background: rgba(124,255,77,0.09); }
+    body::after { bottom: -14rem; right: -8rem; background: rgba(245,197,66,0.06); }
+    h1, h2, h3 { font-family: 'Montserrat', sans-serif; letter-spacing: 0.01em; }
+
+    #age-gate { position: fixed; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(124,255,77,0.18), transparent 48%), var(--bg); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
     #age-gate.fade-out { opacity: 0; pointer-events: none; }
-    .age-gate-card {
-      background: #FFFEF5;
-      border-radius: 24px;
-      padding: 3rem 2.5rem;
-      max-width: 440px; width: 90%;
-      text-align: center;
-      border: 3px solid var(--yellow);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-    }
+    .age-gate-card { background: rgba(17,17,17,0.92); border-radius: 24px; padding: 3rem 2.5rem; max-width: 440px; width: 90%; text-align: center; border: 1px solid var(--line); backdrop-filter: blur(20px); }
     .leaf-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
-    /* Hero */
-    .hero-bg {
-      background: linear-gradient(160deg, #1a4a1a 0%, #2D6A2D 60%, #3d7a2a 100%);
-      position: relative; overflow: hidden;
-    }
-    .hero-bg::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(245,197,24,0.15) 0%, transparent 60%);
-    }
-    .hero-pattern {
-      position: absolute; inset: 0; opacity: 0.04;
-      background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
-      background-size: 20px 20px;
-    }
+    .hero-bg { background: linear-gradient(180deg, #0a0a0a 0%, #101510 100%); position: relative; overflow: hidden; }
+    .hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(124,255,77,0.17) 0%, transparent 55%); }
+    .hero-pattern { position: absolute; inset: 0; opacity: 0.3; background: radial-gradient(circle at 20% 40%, rgba(255,255,255,0.04) 0, transparent 55%); }
 
-    /* Navbar */
-    .navbar { background: rgba(255,254,245,0.95); backdrop-filter: blur(12px); border-bottom: 2px solid var(--yellow); }
+    .navbar { background: rgba(8,8,8,0.75); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .glass-card, .product-card, .review-card { background: rgba(17,17,17,0.9); border: 1px solid var(--line); border-radius: 18px; box-shadow: none; }
+    .product-card { overflow: hidden; transition: all 0.3s ease-in-out; cursor: pointer; }
+    .product-card:hover { transform: translateY(-6px); border-color: rgba(124,255,77,0.45); }
+    .product-card .badge { position: absolute; top: 10px; left: 10px; background: rgba(124,255,77,0.22); color: var(--neon); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .out-of-stock { opacity: 0.58; }
+    .out-of-stock .badge { background: rgba(245,197,66,0.24); color: var(--amber); }
 
-    /* Cards */
-    .product-card {
-      background: #FFFEF5;
-      border: 1px solid rgba(45,106,45,0.12);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(45,106,45,0.18);
-      border-color: var(--yellow);
-    }
-    .product-card .badge {
-      position: absolute; top: 10px; left: 10px;
-      background: var(--yellow); color: #1C1C1C;
-      font-size: 0.7rem; font-weight: 700;
-      padding: 3px 8px; border-radius: 999px;
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .out-of-stock { opacity: 0.6; }
-    .out-of-stock .badge { background: #ef4444; color: white; }
+    .btn-primary { background: var(--neon); color: #060606; font-weight: 700; border-radius: 999px; transition: all 0.3s ease-in-out; border: 1px solid rgba(124,255,77,0.85); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(124,255,77,0.32); }
+    .btn-outline { background: transparent; color: #f5f5f5; font-weight: 600; border-radius: 999px; border: 1px solid var(--line); transition: all 0.3s ease-in-out; }
+    .btn-outline:hover { border-color: rgba(124,255,77,0.4); color: var(--neon); }
 
-    /* Buttons */
-    .btn-primary {
-      background: var(--yellow);
-      color: #1C1C1C;
-      font-weight: 700;
-      border-radius: 999px;
-      transition: all 0.2s;
-      border: 2px solid var(--yellow);
-    }
-    .btn-primary:hover { background: var(--yellow-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,197,24,0.4); }
-    .btn-primary:active { transform: scale(0.97); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--green);
-      font-weight: 600;
-      border-radius: 999px;
-      border: 2px solid var(--green);
-      transition: all 0.2s;
-    }
-    .btn-outline:hover { background: var(--green); color: #FFFEF5; }
-
-    /* Cart drawer */
-    #cart-drawer { transition: transform 0.3s ease; }
+    #cart-drawer { transition: transform 0.3s ease-in-out; background: rgba(14,14,14,0.98); border-left: 1px solid var(--line); }
     #cart-drawer.open { transform: translateX(0) !important; }
-
-    /* Mobile menu */
-    #mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+    #mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; background: rgba(12,12,12,0.98); border-left: 1px solid var(--line); }
     #mobile-menu.open { transform: translateX(0); }
 
-    /* Scroll reveal */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
-
-    /* Section divider */
-    .divider { height: 3px; background: linear-gradient(90deg, transparent, var(--yellow), transparent); }
-
-    /* Review card */
-    .review-card { border-left: 4px solid var(--yellow); }
-
-    /* Stat badge */
-    .stat-badge { background: rgba(245,197,24,0.15); border: 1px solid rgba(245,197,24,0.3); }
-
-    /* Pulse animation for CTA */
-    @keyframes pulse-yellow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(245,197,24,0.6); }
-      50% { box-shadow: 0 0 0 14px rgba(245,197,24,0); }
-    }
-    .pulse-cta { animation: pulse-yellow 2s infinite; }
-
-    /* Floating cart */
-    #float-cart {
-      position: fixed; bottom: 6rem; right: 1.5rem; z-index: 50;
-    }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(124,255,77,0.45), transparent); }
+    .review-card { border-left: 1px solid rgba(124,255,77,0.4); }
+    .stat-badge { background: rgba(255,255,255,0.02); border: 1px solid var(--line); }
+    .pulse-cta { animation: none; }
+    #float-cart { position: fixed; bottom: 6rem; right: 1.5rem; z-index: 50; }
     @media (min-width: 1024px) { #float-cart { bottom: 2rem; } }
-
-    /* WhatsApp button */
     #wa-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; }
     @media (max-width: 1023px) { #wa-btn { bottom: 6rem; right: 4.5rem; } }
   </style>
 </head>
-<body class="text-text-dark">
+<body class="text-text-light">
 
 <!-- AGE GATE -->
 <div id="age-gate">
   <div class="age-gate-card">
     <span class="leaf-icon">🌿</span>
-    <h1 class="text-3xl font-display mb-2" style="color: var(--green)">Herbal Hights</h1>
+    <h1 class="text-3xl font-display mb-2 text-primary">Herbal Hights</h1>
     <p class="text-text-mid mb-6 text-sm leading-relaxed">This website contains cannabis products. By entering, you confirm you are 18 years or older and comply with all local laws.</p>
     <button onclick="passAgeGate()" class="btn-primary w-full py-3 text-lg mb-3">I am 18+ – Enter</button>
     <p class="text-xs text-text-mid/60">By clicking, you agree to our terms and confirm your age.</p>
@@ -186,16 +119,16 @@
 <div id="menu-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden" onclick="closeMenu()"></div>
 
 <!-- MOBILE MENU -->
-<div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-bg-light z-50 p-6 shadow-2xl">
+<div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-bg-elevated z-50 p-6 shadow-2xl">
   <div class="flex justify-between items-center mb-8">
-    <span class="font-display text-xl text-primary font-bold">🌿 Herbal Hights</span>
-    <button onclick="closeMenu()" class="text-text-dark text-2xl">✕</button>
+    <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="h-10 w-auto max-h-[50px]">
+    <button onclick="closeMenu()" class="text-text-light text-2xl">✕</button>
   </div>
   <nav class="space-y-4">
-    <a href="#hero" onclick="closeMenu()" class="block text-lg font-medium text-text-dark hover:text-primary">Home</a>
-    <a href="products.html" class="block text-lg font-medium text-text-dark hover:text-primary">Products</a>
-    <a href="#reviews" onclick="closeMenu()" class="block text-lg font-medium text-text-dark hover:text-primary">Reviews</a>
-    <a href="#about" onclick="closeMenu()" class="block text-lg font-medium text-text-dark hover:text-primary">Our Story</a>
+    <a href="#hero" onclick="closeMenu()" class="block text-lg font-medium text-text-light hover:text-primary">Home</a>
+    <a href="products.html" class="block text-lg font-medium text-text-light hover:text-primary">Products</a>
+    <a href="#reviews" onclick="closeMenu()" class="block text-lg font-medium text-text-light hover:text-primary">Reviews</a>
+    <a href="#about" onclick="closeMenu()" class="block text-lg font-medium text-text-light hover:text-primary">Our Story</a>
     <a href="products.html" class="block btn-primary text-center py-2 mt-4">Shop Now</a>
   </nav>
   <div class="mt-8 pt-6 border-t border-primary/20 space-y-3">
@@ -211,15 +144,14 @@
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
-        <span class="text-2xl">🌿</span>
-        <span class="font-display text-xl font-bold text-primary hidden sm:block">Herbal Hights</span>
+        <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="h-10 sm:h-11 w-auto max-h-[50px]">
       </a>
 
       <nav class="hidden lg:flex gap-8">
-        <a href="#hero" class="font-medium text-text-mid hover:text-primary transition">Home</a>
-        <a href="products.html" class="font-medium text-text-mid hover:text-primary transition">Products</a>
-        <a href="#reviews" class="font-medium text-text-mid hover:text-primary transition">Reviews</a>
-        <a href="#about" class="font-medium text-text-mid hover:text-primary transition">Our Story</a>
+        <a href="#hero" class="font-medium text-text-mid hover:text-primary transition duration-300">Home</a>
+        <a href="products.html" class="font-medium text-text-mid hover:text-primary transition duration-300">Products</a>
+        <a href="#reviews" class="font-medium text-text-mid hover:text-primary transition duration-300">Reviews</a>
+        <a href="#about" class="font-medium text-text-mid hover:text-primary transition duration-300">Our Story</a>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -239,42 +171,42 @@
   <div class="hero-pattern"></div>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
     <div class="max-w-3xl">
-      <div class="inline-flex items-center gap-2 bg-yellow-400/20 text-yellow-300 rounded-full px-4 py-1 text-sm font-medium mb-6 border border-yellow-400/30">
+      <div class="inline-flex items-center gap-2 bg-primary-soft text-primary rounded-full px-4 py-1 text-sm font-medium mb-6 border border-primary/40">
         <span>🌿</span> Premium Cannabis & Edibles
       </div>
-      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-display text-white leading-tight mb-6">
-        Elevated<br><span style="color: var(--yellow)">Experiences.</span><br>Every Time.
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-display text-text-light leading-tight mb-6">
+        Elevated<br><span class="text-secondary">Experiences.</span><br>Every Time.
       </h1>
-      <p class="text-xl text-white/80 max-w-xl mb-10 leading-relaxed">
+      <p class="text-xl text-text-mid max-w-xl mb-10 leading-relaxed">
         Curated selection of premium flower, delicious edibles, and infused treats. Discover your perfect dose with Herbal Hights.
       </p>
       <div class="flex flex-wrap gap-4">
         <a href="products.html" class="btn-primary px-8 py-4 text-lg pulse-cta">Browse Products</a>
-        <a href="#about" class="btn-outline px-8 py-4 text-lg border-white/40 text-white hover:bg-white/10 hover:text-white">Our Story</a>
+        <a href="#about" class="btn-outline px-8 py-4 text-lg">Our Story</a>
       </div>
       <div class="flex gap-8 mt-12">
         <div class="stat-badge rounded-xl px-4 py-3 text-center">
-          <div class="text-2xl font-display text-yellow-400 font-bold">100%</div>
-          <div class="text-white/70 text-xs mt-1">Premium Quality</div>
+          <div class="text-2xl font-display text-secondary font-bold">100%</div>
+          <div class="text-text-mid text-xs mt-1">Premium Quality</div>
         </div>
         <div class="stat-badge rounded-xl px-4 py-3 text-center">
-          <div class="text-2xl font-display text-yellow-400 font-bold">Fast</div>
-          <div class="text-white/70 text-xs mt-1">Delivery</div>
+          <div class="text-2xl font-display text-secondary font-bold">Fast</div>
+          <div class="text-text-mid text-xs mt-1">Delivery</div>
         </div>
         <div class="stat-badge rounded-xl px-4 py-3 text-center">
-          <div class="text-2xl font-display text-yellow-400 font-bold">Secure</div>
-          <div class="text-white/70 text-xs mt-1">Payments</div>
+          <div class="text-2xl font-display text-secondary font-bold">Secure</div>
+          <div class="text-text-mid text-xs mt-1">Payments</div>
         </div>
       </div>
     </div>
   </div>
   <!-- Decorative circles -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full opacity-10" style="background: radial-gradient(circle, var(--yellow), transparent)"></div>
-  <div class="absolute right-20 bottom-20 w-40 h-40 rounded-full opacity-5" style="background: var(--yellow)"></div>
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full opacity-10" style="background: radial-gradient(circle, var(--amber), transparent)"></div>
+  <div class="absolute right-20 bottom-20 w-40 h-40 rounded-full opacity-5" style="background: var(--amber)"></div>
 </section>
 
 <!-- FEATURED PRODUCTS -->
-<section id="products" class="py-20 bg-bg-light">
+<section id="products" class="py-20">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12 reveal">
       <h2 class="text-4xl font-display text-primary mb-4">Our Menu Highlights</h2>
@@ -282,7 +214,7 @@
     </div>
     <div class="divider mb-12"></div>
 
-    <div id="featured-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
+    <div id="featured-grid" class="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-4 sm:gap-6 max-w-6xl mx-auto">
       <!-- Products loaded from Firebase -->
       <div class="col-span-2 md:col-span-3 lg:col-span-4 text-center py-8 text-text-mid">
         <div class="inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mb-3"></div>
@@ -301,9 +233,9 @@
 <div class="divider"></div>
 
 
-<section class="py-10 bg-bg-card">
+<section class="py-10">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="rounded-2xl border border-primary/15 bg-bg-light p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div class="glass-card p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div>
         <h3 class="text-2xl font-display text-primary">Stay in the loop 🌿</h3>
         <p class="text-text-mid text-sm">Follow us on Telegram and join the WhatsApp group for menu drops and promos.</p>
@@ -317,7 +249,7 @@
 </section>
 
 <!-- REVIEWS -->
-<section id="reviews" class="py-20 bg-bg-card">
+<section id="reviews" class="py-20">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
     <div class="text-center mb-12 reveal">
       <h2 class="text-4xl font-display text-primary mb-4">What Our Customers Say</h2>
@@ -332,11 +264,11 @@
 <div class="divider"></div>
 
 <!-- ABOUT -->
-<section id="about" class="py-20 bg-bg-light">
+<section id="about" class="py-20">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div class="reveal">
-        <div class="aspect-square rounded-3xl overflow-hidden bg-primary/10 relative shadow-2xl">
+        <div class="aspect-square rounded-3xl overflow-hidden glass-card relative">
           <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-10">
             <div class="text-8xl mb-4">🌿</div>
             <h3 class="text-2xl font-display text-primary font-bold mb-2">Herbal Hights</h3>
@@ -378,24 +310,24 @@
       <div class="col-span-2 md:col-span-1">
         <div class="flex items-center gap-2 mb-3">
           <span class="text-2xl">🌿</span>
-          <span class="font-display text-xl text-white font-bold">Herbal Hights</span>
+          <img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="h-10 w-auto max-h-[50px]">
         </div>
         <p class="text-white/60 text-sm">Elevated experiences, every time.</p>
       </div>
       <div>
         <h4 class="text-white font-semibold mb-4">Quick Links</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="products.html" class="text-white/60 hover:text-yellow-400 transition">Products</a></li>
-          <li><a href="#reviews" class="text-white/60 hover:text-yellow-400 transition">Reviews</a></li>
-          <li><a href="#about" class="text-white/60 hover:text-yellow-400 transition">Our Story</a></li>
+          <li><a href="products.html" class="text-white/60 hover:text-secondary transition">Products</a></li>
+          <li><a href="#reviews" class="text-white/60 hover:text-secondary transition">Reviews</a></li>
+          <li><a href="#about" class="text-white/60 hover:text-secondary transition">Our Story</a></li>
         </ul>
       </div>
       <div>
         <h4 class="text-white font-semibold mb-4">Connect</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="https://wa.me/27000000000" target="_blank" class="text-white/60 hover:text-yellow-400 transition">WhatsApp</a></li>
-          <li><a href="#" class="text-white/60 hover:text-yellow-400 transition">Instagram</a></li>
-          <li><a href="#" class="text-white/60 hover:text-yellow-400 transition">Facebook</a></li>
+          <li><a href="https://wa.me/27000000000" target="_blank" class="text-white/60 hover:text-secondary transition">WhatsApp</a></li>
+          <li><a href="#" class="text-white/60 hover:text-secondary transition">Instagram</a></li>
+          <li><a href="#" class="text-white/60 hover:text-secondary transition">Facebook</a></li>
         </ul>
       </div>
     </div>
@@ -407,7 +339,7 @@
 
 <!-- WHATSAPP FAB -->
 <a id="wa-btn" href="https://wa.me/27000000000" target="_blank"
-   class="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-green-600 active:scale-95 transition"
+   class="w-14 h-14 btn-primary w-14 h-14 rounded-full flex items-center justify-center active:scale-95 transition"
    aria-label="Chat on WhatsApp">
   <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M20.52 3.48A11.91 11.91 0 0012.07 0C5.44 0 .04 5.4.04 12.03c0 2.12.55 4.18 1.6 6.01L0 24l6.15-1.61a12.03 12.03 0 005.92 1.51h.01c6.63 0 12.03-5.4 12.03-12.03 0-3.21-1.25-6.23-3.59-8.39z"/></svg>
 </a>
@@ -471,7 +403,7 @@
               <span class="badge">${inStock ? 'In Stock' : 'Sold Out'}</span>
             </div>
             <div class="p-4">
-              <h3 class="font-semibold text-text-dark text-sm leading-tight mb-1">${p.name}</h3>
+              <h3 class="font-semibold text-text-light text-sm leading-tight mb-1">${p.name}</h3>
               <p class="text-xs text-text-mid mb-2 line-clamp-2">${p.description || ''}</p>
               <p class="font-display text-lg font-bold text-primary">R${p.price}</p>
             </div>
@@ -487,7 +419,7 @@
     const stars = '★'.repeat(r.rating || 5) + '☆'.repeat(5 - (r.rating || 5));
     const date = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-ZA') : '';
     return `
-      <div class="review-card bg-bg-light rounded-2xl p-5 shadow-sm">
+      <div class="review-card bg-bg-elevated rounded-2xl p-5 shadow-sm">
         <div class="flex justify-between items-start mb-3">
           <p class="font-semibold text-primary">${escHtml(r.name || 'Customer')}</p>
           <span class="text-yellow-500 text-sm">${stars}</span>
@@ -523,7 +455,7 @@
 
   function renderReviewFormBlock() {
     return `
-      <div class="bg-bg-light rounded-2xl p-6 shadow-md border border-primary/10">
+      <div class="bg-bg-elevated rounded-2xl p-6 shadow-md border border-primary/10">
         <h3 class="text-xl font-display text-primary mb-5 text-center">Leave a Review</h3>
         <div id="review-form">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
