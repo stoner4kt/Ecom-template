@@ -10,9 +10,9 @@
       theme: {
         extend: {
           colors: {
-            primary: "#2D6A2D", "primary-dark": "#1a4a1a",
-            secondary: "#F5C518", "bg-light": "#FFFEF5", "bg-card": "#F9FBF2",
-            "text-dark": "#1C1C1C", "text-mid": "#4A4A4A",
+            primary: "#4A7C59", "primary-dark": "#2E5E3E",
+            "primary-soft": "rgba(74,124,89,0.15)", secondary: "#C49A3C", "bg-dark": "#0E0C09", "bg-card": "#171310", "bg-elevated": "#1E1A14",
+            "text-light": "#F0EDE6", "text-mid": "#A89880",
           },
           fontFamily: { display: ["'Playfair Display'", "serif"], body: ["'DM Sans'", "sans-serif"] }
         }
@@ -20,18 +20,18 @@
     };
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --green: #2D6A2D; --green-dark: #1a4a1a; --yellow: #F5C518; }
-    body { background: #f4f6f0; font-family: 'DM Sans', sans-serif; }
-    h1,h2,h3 { font-family: 'Playfair Display', serif; }
+    :root { --green: #4A7C59; --green-dark: #2E5E3E; --yellow: #C49A3C; --sidebar-bg: #0E0C09; }
+    body { background: #0E0C09; color: #F0EDE6; font-family: 'DM Sans', sans-serif; }
+    .font-display, h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
     /* Sidebar */
-    #sidebar { background: var(--green-dark); width: 260px; min-height: 100vh; position: fixed; top: 0; left: 0; z-index: 40; transition: transform 0.3s; }
+    #sidebar { background: var(--sidebar-bg); width: 260px; min-height: 100vh; position: fixed; top: 0; left: 0; z-index: 40; transition: transform 0.3s; }
     @media (max-width: 1023px) { #sidebar { transform: translateX(-100%); } #sidebar.open { transform: translateX(0); } }
     .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-radius: 12px; margin: 2px 8px; color: rgba(255,255,255,0.75); font-weight: 500; transition: all 0.2s; cursor: pointer; }
-    .sidebar-link:hover { background: rgba(255,255,255,0.1); color: white; }
-    .sidebar-link.active { background: var(--yellow); color: #1C1C1C; font-weight: 700; }
+    .sidebar-link:hover { background: rgba(74,124,89,0.16); color: #6BAF84; }
+    .sidebar-link.active { background: var(--yellow); color: #0E0C09; font-weight: 700; }
     .sidebar-link .icon { font-size: 1.2rem; width: 24px; text-align: center; }
 
     /* Main content */
@@ -39,35 +39,35 @@
     @media (max-width: 1023px) { #main-content { margin-left: 0; } }
 
     /* Top bar */
-    .topbar { background: white; border-bottom: 2px solid var(--yellow); position: sticky; top: 0; z-index: 30; }
+    .topbar { background: #13100C; border-bottom: 2px solid var(--yellow); position: sticky; top: 0; z-index: 30; }
     .brand-logo { height: 2.2rem; width: auto; max-height: 50px; object-fit: contain; display: block; }
-    .brand-wrap { padding: 0.3rem 0.45rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.03); display: inline-flex; align-items: center; }
+    .brand-wrap { padding: 0.3rem 0.45rem; border-radius: 12px; border: 1px solid rgba(196,154,60,0.18); background: rgba(255,255,255,0.03); display: inline-flex; align-items: center; }
 
     /* Cards */
-    .card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid rgba(45,106,45,0.08); }
+    .card { background: #1E1A14; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.16); border: 1px solid rgba(74,124,89,0.12); }
     .stat-card { text-align: center; border-left: 4px solid var(--yellow); }
 
     /* Buttons */
-    .btn-primary { background: var(--yellow); color: #1C1C1C; font-weight: 700; border-radius: 999px; transition: all 0.2s; border: 2px solid var(--yellow); padding: 8px 20px; }
-    .btn-primary:hover { background: #FFD740; }
+    .btn-primary { background: var(--yellow); color: #0E0C09; font-weight: 700; border-radius: 999px; transition: all 0.2s; border: 2px solid var(--yellow); padding: 8px 20px; }
+    .btn-primary:hover { background: #d2aa4f; }
     .btn-danger { background: #ef4444; color: white; font-weight: 600; border-radius: 999px; transition: all 0.2s; padding: 6px 16px; font-size: 0.8rem; }
     .btn-danger:hover { background: #dc2626; }
     .btn-success { background: #22c55e; color: white; font-weight: 600; border-radius: 999px; transition: all 0.2s; padding: 6px 16px; font-size: 0.8rem; }
     .btn-success:hover { background: #16a34a; }
     .btn-outline { border: 2px solid var(--green); color: var(--green); border-radius: 999px; font-weight: 600; padding: 6px 16px; transition: all 0.2s; font-size: 0.8rem; }
-    .btn-outline:hover { background: var(--green); color: white; }
+    .btn-outline:hover { background: rgba(74,124,89,0.12); color: #6BAF84; border-color: rgba(74,124,89,0.4); }
 
     /* Forms */
-    .field { width: 100%; border: 1.5px solid rgba(45,106,45,0.2); border-radius: 10px; padding: 10px 14px; font-size: 0.875rem; background: #FFFEF5; transition: border 0.2s; outline: none; font-family: 'DM Sans', sans-serif; }
-    .field:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,106,45,0.08); }
-    label.field-label { display: block; font-size: 0.8rem; font-weight: 600; color: #4A4A4A; margin-bottom: 4px; }
+    .field { width: 100%; border: 1.5px solid rgba(74,124,89,0.25); border-radius: 10px; padding: 10px 14px; font-size: 0.875rem; background: #13100C; color: #F0EDE6; transition: border 0.2s, box-shadow 0.2s; outline: none; font-family: 'DM Sans', sans-serif; }
+    .field:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(74,124,89,0.12); }
+    label.field-label { display: block; font-size: 0.8rem; font-weight: 600; color: #A89880; margin-bottom: 4px; }
 
     /* Table */
     .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
-    th { text-align: left; padding: 10px 12px; background: #f4f6f0; font-weight: 700; color: var(--green); border-bottom: 2px solid rgba(45,106,45,0.1); white-space: nowrap; }
-    td { padding: 10px 12px; border-bottom: 1px solid rgba(45,106,45,0.06); vertical-align: middle; }
-    tr:hover td { background: #FFFEF5; }
+    th { text-align: left; padding: 10px 12px; background: #1A1612; font-weight: 700; color: #6BAF84; border-bottom: 2px solid rgba(74,124,89,0.16); white-space: nowrap; }
+    td { padding: 10px 12px; border-bottom: 1px solid rgba(74,124,89,0.08); vertical-align: middle; }
+    tr:hover td { background: rgba(74,124,89,0.08); }
 
     /* Status badges */
     .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
@@ -77,31 +77,34 @@
     .status-cancelled { background: #fee2e2; color: #991b1b; }
 
     /* Upload zone */
-    .upload-zone { border: 2px dashed rgba(45,106,45,0.3); border-radius: 12px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s; }
-    .upload-zone:hover { border-color: var(--yellow); background: rgba(245,197,24,0.05); }
+    .upload-zone { border: 2px dashed rgba(74,124,89,0.3); border-radius: 12px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s; }
+    .upload-zone:hover { border-color: var(--yellow); background: rgba(196,154,60,0.08); }
 
     /* Tabs */
     .tab-btn { padding: 10px 20px; font-weight: 600; border-radius: 999px; transition: all 0.2s; font-size: 0.875rem; }
-    .tab-btn.active { background: var(--yellow); color: #1C1C1C; }
-    .tab-btn:not(.active) { color: #4A4A4A; }
-    .tab-btn:not(.active):hover { background: rgba(45,106,45,0.08); color: var(--green); }
+    .tab-btn.active { background: var(--yellow); color: #0E0C09; }
+    .tab-btn:not(.active) { color: #A89880; }
+    .tab-btn:not(.active):hover { background: rgba(74,124,89,0.12); color: #6BAF84; }
 
     /* Login screen */
-    #login-screen { position: fixed; inset: 0; background: linear-gradient(135deg, var(--green-dark), var(--green)); z-index: 100; display: flex; align-items: center; justify-content: center; }
+    #login-screen { position: fixed; inset: 0; background: linear-gradient(135deg, #0E0C09, #2E5E3E); z-index: 100; display: flex; align-items: center; justify-content: center; }
 
     /* Modal */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 80; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-    .modal-card { background: white; border-radius: 20px; padding: 2rem; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; }
+    .modal-card { background: #1E1A14; border-radius: 20px; padding: 2rem; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(74,124,89,0.12); }
 
     /* POP viewer */
     #pop-modal img { max-height: 70vh; object-fit: contain; }
+
+    .toast { position: fixed; right: 1.5rem; bottom: 1.5rem; background: #13100C; color: #F0EDE6; border: 1px solid rgba(74,124,89,0.3); border-radius: 999px; padding: 0.85rem 1.15rem; box-shadow: 0 10px 30px rgba(0,0,0,0.25); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 120; }
+    .toast.show { opacity: 1; transform: translateY(0); }
   </style>
 </head>
-<body class="text-text-dark">
+<body class="text-text-light">
 
 <!-- LOGIN SCREEN -->
 <div id="login-screen">
-  <div class="bg-white rounded-3xl p-10 max-w-sm w-full mx-4 shadow-2xl border-t-4 border-yellow-400">
+  <div class="bg-[#1E1A14] rounded-3xl p-10 max-w-sm w-full mx-4 shadow-2xl border-t-4 border-secondary">
     <div class="text-center mb-6">
       <div class="mb-3 flex justify-center"><span class="brand-wrap"><img src="assets/images/logo.PNG" alt="Herbal Heights logo" class="brand-logo"></span></div>
       <h1 class="text-2xl font-display text-primary">Admin Panel</h1>
@@ -148,10 +151,10 @@
     </div>
   </nav>
   <div class="absolute bottom-6 left-0 right-0 px-5">
-    <button onclick="adminLogout()" class="w-full text-white/60 hover:text-white text-sm flex items-center gap-2 p-3 rounded-lg hover:bg-white/10 transition">
+    <button onclick="adminLogout()" class="w-full text-white/60 hover:text-[#6BAF84] text-sm flex items-center gap-2 p-3 rounded-lg hover:bg-primary/10 transition">
       <span>🚪</span> Sign Out
     </button>
-    <a href="index.html" target="_blank" class="mt-2 w-full text-white/60 hover:text-white text-sm flex items-center gap-2 p-3 rounded-lg hover:bg-white/10 transition">
+    <a href="index.html" target="_blank" class="mt-2 w-full text-white/60 hover:text-[#6BAF84] text-sm flex items-center gap-2 p-3 rounded-lg hover:bg-primary/10 transition">
       <span>🌐</span> View Site
     </a>
   </div>
@@ -170,7 +173,7 @@
     </div>
     <div class="flex items-center gap-3">
       <span id="admin-name" class="text-sm text-text-mid hidden sm:block"></span>
-      <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background: var(--yellow);">A</div>
+      <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm text-[#0E0C09]" style="background: var(--yellow);">A</div>
     </div>
   </div>
 
@@ -296,7 +299,7 @@
               <input type="file" id="p-image" accept="image/*" class="hidden" onchange="handleProductImage(this)">
               <div id="p-upload-placeholder">
                 <div class="text-3xl mb-2">📷</div>
-                <p class="font-medium text-text-dark text-sm">Click to upload image</p>
+                <p class="font-medium text-text-light text-sm">Click to upload image</p>
                 <p class="text-xs text-text-mid">JPG, PNG (max 5MB)</p>
               </div>
               <div id="p-image-preview" class="hidden">
@@ -344,6 +347,8 @@
     <div id="order-detail-content"></div>
   </div>
 </div>
+
+<div id="toast" class="toast"></div>
 
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -477,7 +482,7 @@
       tbody.innerHTML = snap.docs.map(doc => {
         const p = { id: doc.id, ...doc.data() };
         return `<tr>
-          <td><img src="${p.imageUrl || 'https://placehold.co/60x60/2D6A2D/F5C518?text=P'}" class="w-12 h-12 object-cover rounded-lg" onerror="this.src='https://placehold.co/60x60/2D6A2D/F5C518?text=P'"></td>
+          <td><img src="${p.imageUrl || 'https://placehold.co/60x60/4A7C59/C49A3C?text=P'}" class="w-12 h-12 object-cover rounded-lg" onerror="this.src='https://placehold.co/60x60/4A7C59/C49A3C?text=P'"></td>
           <td class="font-medium max-w-[160px]"><p class="truncate">${escHtml(p.name)}</p>${p.description ? `<p class="text-xs text-text-mid truncate">${escHtml(p.description)}</p>` : ''}</td>
           <td><span class="capitalize text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">${p.category || '–'}</span></td>
           <td class="font-bold text-primary">R${p.price}</td>
@@ -664,7 +669,7 @@
     editingProductImageUrl = null;
     document.getElementById('p-upload-placeholder').innerHTML = `
       <div class="text-3xl mb-2">📷</div>
-      <p class="font-medium text-text-dark text-sm">Click to upload image</p>
+      <p class="font-medium text-text-light text-sm">Click to upload image</p>
       <p class="text-xs text-text-mid">JPG, PNG (max 5MB)</p>`;
     document.getElementById('p-upload-placeholder').classList.remove('hidden');
     document.getElementById('p-image-preview').classList.add('hidden');
@@ -704,19 +709,20 @@
       return `<tr>
         <td class="font-mono text-xs text-primary">${escHtml(o.orderId || o.id.slice(0,8)+'…')}</td>
         <td><p class="font-medium">${escHtml(o.customerName || '–')}</p><p class="text-xs text-text-mid">${escHtml(o.email || '')}</p></td>
-        <td><a href="https://wa.me/${(o.whatsapp||'').replace(/\D/g,'')}" target="_blank" class="text-primary hover:underline text-sm">${escHtml(o.whatsapp || '–')}</a></td>
+        <td><a href="https://wa.me/${((o.customerPhone || o.whatsapp)||'').replace(/\D/g,'')}" target="_blank" class="text-primary hover:underline text-sm">${escHtml(o.customerPhone || o.whatsapp || '–')}</a></td>
         <td class="text-xs text-text-mid max-w-[120px]"><p class="truncate">${escHtml(itemsSummary)}</p></td>
         <td class="font-bold text-primary">R${getOrderTotal(o)}</td>
         <td>
           ${o.receiptUrl ? `<a href='${o.receiptUrl}' target='_blank' class='btn-success text-xs inline-block'>Receipt</a>` : `<span class='text-xs text-text-mid'>${escHtml(o.orderId || 'Order ref')}</span>`}
         </td>
         <td>
-          <select onchange="updateOrderStatus('${o.id}', this.value)" class="field text-xs py-1 px-2 rounded-lg" style="width: auto; min-width: 120px;">
+          <select onclick="event.stopPropagation()" onchange="updateOrderStatus('${o.id}', this.value)" class="field text-xs py-1 px-2 rounded-lg" style="width: auto; min-width: 120px;">
             <option value="pending" ${o.status==='pending'?'selected':''}>⏳ Pending</option>
             <option value="confirmed" ${o.status==='confirmed'?'selected':''}>✅ Confirmed</option>
             <option value="delivered" ${o.status==='delivered'?'selected':''}>🚚 Delivered</option>
             <option value="cancelled" ${o.status==='cancelled'?'selected':''}>❌ Cancelled</option>
           </select>
+          <button onclick="deleteOrder('${o.id}', event)" class="btn-danger ml-2" title="Delete order">🗑 Delete</button>
         </td>
         <td class="text-xs text-text-mid">${date}</td>
       </tr>`;
@@ -728,7 +734,49 @@
       await db.collection('orders').doc(orderId).update({ status: newStatus, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
       const order = allOrders.find(o => o.id === orderId);
       if (order) order.status = newStatus;
+
+      // Prompt admin to notify customer via WhatsApp
+      if (order && (order.customerPhone || order.whatsapp)) {
+        const customerPhone = order.customerPhone || order.whatsapp;
+        const shouldNotify = confirm(
+          `Status updated to "${newStatus}".\n\nNotify ${order.customerName || 'customer'} via WhatsApp?\nNumber: ${customerPhone}`
+        );
+        if (shouldNotify) {
+          sendWhatsAppNotification({ ...order, customerPhone }, newStatus);
+        }
+      }
     } catch (e) { alert('Failed to update status: ' + e.message); }
+  }
+
+  async function deleteOrder(orderId, event) {
+    event.stopPropagation();
+    if (!confirm('Are you sure you want to permanently delete this order? This cannot be undone.')) return;
+    try {
+      await db.collection('orders').doc(orderId).delete();
+      allOrders = allOrders.filter(o => o.id !== orderId);
+      filterOrders(currentOrderFilter, document.querySelector(`[data-status="${currentOrderFilter}"]`));
+      showToast('Order deleted.');
+    } catch (e) {
+      alert('Failed to delete order: ' + e.message);
+    }
+  }
+
+  function sendWhatsAppNotification(order, newStatus) {
+    const statusMessages = {
+      confirmed:  `Hi ${order.customerName || 'there'} 👋, your Herbal Heights order *#${order.id.slice(-6).toUpperCase()}* has been *confirmed* ✅. We're getting it ready for you!`,
+      delivered:  `Hi ${order.customerName || 'there'} 🌿, great news! Your Herbal Heights order *#${order.id.slice(-6).toUpperCase()}* has been *delivered* 🚚. Enjoy!`,
+      cancelled:  `Hi ${order.customerName || 'there'}, unfortunately your Herbal Heights order *#${order.id.slice(-6).toUpperCase()}* has been *cancelled* ❌. Please contact us if you have questions.`,
+      pending:    `Hi ${order.customerName || 'there'}, your Herbal Heights order *#${order.id.slice(-6).toUpperCase()}* is currently *pending* ⏳. We'll update you soon.`,
+    };
+
+    const message = statusMessages[newStatus] || `Your Herbal Heights order #${order.id.slice(-6).toUpperCase()} status has been updated to: ${newStatus}.`;
+
+    let phone = (order.customerPhone || '').replace(/[\s\-\(\)]/g, '');
+    if (phone.startsWith('0')) phone = '27' + phone.slice(1);
+    phone = phone.replace(/^\+/, '');
+
+    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank');
   }
 
   function viewPOP(url) {
@@ -746,6 +794,7 @@
         <div class="grid grid-cols-2 gap-3 text-sm">
           <div><p class="text-text-mid text-xs">Customer</p><p class="font-semibold">${escHtml(o.customerName || '–')}</p></div>
           <div><p class="text-text-mid text-xs">WhatsApp</p><p class="font-semibold">${escHtml(o.whatsapp || '–')}</p></div>
+          ${(o.customerPhone || o.whatsapp) ? `<div><p class="text-text-mid text-xs">WhatsApp / Phone</p><p class="font-medium">${escHtml(o.customerPhone || o.whatsapp)}</p></div>` : ''}
           <div><p class="text-text-mid text-xs">Email</p><p class="font-semibold">${escHtml(o.email || '–')}</p></div>
           <div><p class="text-text-mid text-xs">Status</p><span class="status-badge status-${o.status}">${o.status || 'pending'}</span></div>
           <div class="col-span-2"><p class="text-text-mid text-xs">Delivery Address</p><p class="font-semibold">${escHtml(o.address || '–')}</p></div>
@@ -757,6 +806,7 @@
           <div class="flex justify-between pt-2 border-t font-bold"><span>Total</span><span class="text-primary">R${getOrderTotal(o)}</span></div>
         </div>
         <p class="text-xs text-text-mid pt-2 border-t">Share the customer receipt/order reference to verify payment.</p>
+        <button onclick="deleteOrder('${o.id}', event); document.getElementById('order-detail-modal').classList.add('hidden');" class="btn-danger mt-4 w-full">🗑 Delete This Order</button>
       </div>`;
     document.getElementById('order-detail-modal').classList.remove('hidden');
   }
@@ -769,6 +819,15 @@
   }
 
   function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
 
   function loadDashboard() { loadOverview(); }
 </script>
