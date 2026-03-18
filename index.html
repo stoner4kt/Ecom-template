@@ -11,19 +11,19 @@
       theme: {
         extend: {
           colors: {
-            primary: "#7CFF4D",
-            "primary-dark": "#53d728",
-            "primary-soft": "#7CFF4D1A",
-            secondary: "#F5C542",
-            "bg-dark": "#0A0A0A",
-            "bg-card": "#111111",
-            "bg-elevated": "#171717",
-            "text-light": "#F5F5F5",
-            "text-mid": "#B3B3B3",
+            primary: "#4A7C59",
+            "primary-dark": "#2E5E3E",
+            "primary-soft": "rgba(74,124,89,0.15)",
+            secondary: "#C49A3C",
+            "bg-dark": "#0E0C09",
+            "bg-card": "#171310",
+            "bg-elevated": "#1E1A14",
+            "text-light": "#F0EDE6",
+            "text-mid": "#A89880",
           },
           fontFamily: {
-            display: ["'Montserrat'", "sans-serif"],
-            body: ["'Inter'", "sans-serif"],
+            display: ["'Playfair Display'", "serif"],
+            body: ["'DM Sans'", "sans-serif"],
           }
         }
       }
@@ -31,22 +31,22 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0A0A0A;
-      --card: #111111;
-      --elevated: #171717;
-      --neon: #7CFF4D;
-      --amber: #F5C542;
+      --bg: #0E0C09;
+      --card: #171310;
+      --elevated: #1E1A14;
+      --neon: #4A7C59;
+      --amber: #C49A3C;
       --line: rgba(255,255,255,0.1);
     }
 
     body {
       background: var(--bg);
-      color: #F5F5F5;
-      font-family: 'Inter', sans-serif;
+      color: #F0EDE6;
+      font-family: 'DM Sans', sans-serif;
       position: relative;
     }
     body::before, body::after {
@@ -59,43 +59,43 @@
       pointer-events: none;
       z-index: -1;
     }
-    body::before { top: -12rem; left: -10rem; background: rgba(124,255,77,0.09); }
-    body::after { bottom: -14rem; right: -8rem; background: rgba(245,197,66,0.06); }
-    h1, h2, h3 { font-family: 'Montserrat', sans-serif; letter-spacing: 0.01em; }
+    body::before { top: -12rem; left: -10rem; background: rgba(74,124,89,0.07); }
+    body::after { bottom: -14rem; right: -8rem; background: rgba(196,154,60,0.05); }
+    .font-display, h1, h2, h3 { font-family: 'Playfair Display', serif; letter-spacing: 0.01em; }
 
-    #age-gate { position: fixed; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(124,255,77,0.18), transparent 48%), var(--bg); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+    #age-gate { position: fixed; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(74,124,89,0.12), transparent 48%), var(--bg); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
     #age-gate.fade-out { opacity: 0; pointer-events: none; }
-    .age-gate-card { background: rgba(17,17,17,0.92); border-radius: 24px; padding: 3rem 2.5rem; max-width: 440px; width: 90%; text-align: center; border: 1px solid var(--line); backdrop-filter: blur(20px); }
+    .age-gate-card { background: rgba(23,19,16,0.92); border-radius: 24px; padding: 3rem 2.5rem; max-width: 440px; width: 90%; text-align: center; border: 1px solid var(--line); backdrop-filter: blur(20px); }
     .leaf-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
-    .hero-bg { background: linear-gradient(180deg, #0a0a0a 0%, #101510 100%); position: relative; overflow: hidden; }
-    .hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(124,255,77,0.17) 0%, transparent 55%); }
+    .hero-bg { background: linear-gradient(180deg, #0E0C09 0%, #16120e 100%); position: relative; overflow: hidden; }
+    .hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(74,124,89,0.12) 0%, transparent 55%); }
     .hero-pattern { position: absolute; inset: 0; opacity: 0.3; background: radial-gradient(circle at 20% 40%, rgba(255,255,255,0.04) 0, transparent 55%); }
 
-    .navbar { background: rgba(8,8,8,0.75); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .navbar { background: rgba(18,15,11,0.82); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
     .brand-logo { height: 2.4rem; width: auto; max-height: 50px; object-fit: contain; display: block; }
     .brand-wrap { padding: 0.35rem 0.6rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
-    .glass-card, .product-card, .review-card { background: rgba(17,17,17,0.9); border: 1px solid var(--line); border-radius: 18px; box-shadow: none; }
+    .glass-card, .product-card, .review-card { background: rgba(23,19,16,0.9); border: 1px solid var(--line); border-radius: 18px; box-shadow: none; }
     .product-card { overflow: hidden; transition: all 0.3s ease-in-out; cursor: pointer; }
-    .product-card:hover { transform: translateY(-6px); border-color: rgba(124,255,77,0.45); }
-    .product-card .badge { position: absolute; top: 10px; left: 10px; background: rgba(124,255,77,0.22); color: var(--neon); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .product-card:hover { transform: translateY(-6px); border-color: rgba(74,124,89,0.5); }
+    .product-card .badge { position: absolute; top: 10px; left: 10px; background: rgba(74,124,89,0.2); color: #6BAF84; font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; }
     .out-of-stock { opacity: 0.58; }
-    .out-of-stock .badge { background: rgba(245,197,66,0.24); color: var(--amber); }
+    .out-of-stock .badge { background: rgba(196,154,60,0.24); color: var(--amber); }
 
-    .btn-primary { background: var(--neon); color: #060606; font-weight: 700; border-radius: 999px; transition: all 0.3s ease-in-out; border: 1px solid rgba(124,255,77,0.85); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(124,255,77,0.32); }
+    .btn-primary { background: var(--neon); color: #060606; font-weight: 700; border-radius: 999px; transition: all 0.3s ease-in-out; border: 1px solid rgba(74,124,89,0.85); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(74,124,89,0.25); }
     .btn-outline { background: transparent; color: #f5f5f5; font-weight: 600; border-radius: 999px; border: 1px solid var(--line); transition: all 0.3s ease-in-out; }
-    .btn-outline:hover { border-color: rgba(124,255,77,0.4); color: var(--neon); }
+    .btn-outline:hover { border-color: rgba(74,124,89,0.4); color: var(--neon); }
 
-    #cart-drawer { transition: transform 0.3s ease-in-out; background: rgba(14,14,14,0.98); border-left: 1px solid var(--line); }
+    #cart-drawer { transition: transform 0.3s ease-in-out; background: rgba(23,19,16,0.98); border-left: 1px solid var(--line); }
     #cart-drawer.open { transform: translateX(0) !important; }
-    #mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; background: rgba(12,12,12,0.98); border-left: 1px solid var(--line); }
+    #mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; background: rgba(30,26,20,0.98); border-left: 1px solid var(--line); }
     #mobile-menu.open { transform: translateX(0); }
 
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(124,255,77,0.45), transparent); }
-    .review-card { border-left: 1px solid rgba(124,255,77,0.4); }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(74,124,89,0.35), transparent); }
+    .review-card { border-left: 1px solid rgba(74,124,89,0.4); }
     .stat-badge { background: rgba(255,255,255,0.02); border: 1px solid var(--line); }
     .pulse-cta { animation: none; }
     #float-cart { position: fixed; bottom: 6rem; right: 1.5rem; z-index: 50; }
@@ -306,7 +306,7 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="pt-12 pb-6 bg-[#080808] border-t border-white/10">
+<footer class="pt-12 pb-6 bg-[#13100C] border-t border-white/10">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
       <div class="col-span-2 md:col-span-1">
@@ -399,8 +399,8 @@
         grid.innerHTML += `
           <div class="product-card ${!inStock ? 'out-of-stock' : ''} group">
             <div class="relative">
-              <img src="${p.imageUrl || 'https://placehold.co/400x300/2D6A2D/F5C518?text=' + encodeURIComponent(p.name)}"
-                   alt="${p.name}" class="w-full h-40 object-cover" onerror="this.src='https://placehold.co/400x300/2D6A2D/F5C518?text=Product'">
+              <img src="${p.imageUrl || 'https://placehold.co/400x300/4A7C59/C49A3C?text=' + encodeURIComponent(p.name)}"
+                   alt="${p.name}" class="w-full h-40 object-cover" onerror="this.src='https://placehold.co/400x300/4A7C59/C49A3C?text=Product'">
               <span class="badge">${inStock ? 'In Stock' : 'Sold Out'}</span>
             </div>
             <div class="p-4">

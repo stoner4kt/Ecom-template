@@ -10,50 +10,50 @@
       theme: {
         extend: {
           colors: {
-            primary: "#7CFF4D", "primary-dark": "#53d728",
-            secondary: "#F5C542", "bg-dark": "#0A0A0A", "bg-card": "#111111", "bg-elevated": "#171717",
-            "text-light": "#F5F5F5", "text-mid": "#B3B3B3",
+            primary: "#4A7C59", "primary-dark": "#2E5E3E",
+            "primary-soft": "rgba(74,124,89,0.15)", secondary: "#C49A3C", "bg-dark": "#0E0C09", "bg-card": "#171310", "bg-elevated": "#1E1A14",
+            "text-light": "#F0EDE6", "text-mid": "#A89880",
           },
-          fontFamily: { display: ["'Montserrat'", "sans-serif"], body: ["'Inter'", "sans-serif"] }
+          fontFamily: { display: ["'Playfair Display'", "serif"], body: ["'DM Sans'", "sans-serif"] }
         }
       }
     };
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --neon:#7CFF4D; --amber:#F5C542; --line:rgba(255,255,255,0.1); }
-    body { background:#0A0A0A; color:#F5F5F5; font-family:'Inter',sans-serif; }
-    h1,h2,h3 { font-family:'Montserrat',sans-serif; }
-    .navbar { background: rgba(8,8,8,0.75); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    :root { --neon:#4A7C59; --amber:#C49A3C; --line:rgba(255,255,255,0.1); }
+    body { background:#0E0C09; color:#F0EDE6; font-family:'DM Sans',sans-serif; }
+    .font-display, h1, h2, h3 { font-family:'Playfair Display',serif; }
+    .navbar { background: rgba(18,15,11,0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
     .brand-logo { height: 2.35rem; width: auto; max-height: 50px; object-fit: contain; display: block; }
     .brand-wrap { padding: 0.35rem 0.55rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
-    .product-card { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: all 0.3s ease-in-out; background: rgba(17,17,17,0.9); }
-    .product-card:hover { transform: translateY(-4px); border-color: rgba(124,255,77,0.45); }
+    .product-card { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: all 0.3s ease-in-out; background: rgba(23,19,16,0.9); }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(74,124,89,0.5); }
     .out-of-stock { opacity: 0.6; }
-    .badge { position: absolute; top: 8px; left: 8px; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(124,255,77,0.2); color: var(--neon); }
-    .btn-primary { background: var(--neon); color: #080808; font-weight: 700; border-radius: 999px; transition: all 0.3s ease-in-out; border: 1px solid rgba(124,255,77,0.8); }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 20px rgba(124,255,77,0.32); }
+    .badge { position: absolute; top: 8px; left: 8px; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(74,124,89,0.2); color: #6BAF84; }
+    .btn-primary { background: var(--neon); color: #080808; font-weight: 700; border-radius: 999px; transition: all 0.3s ease-in-out; border: 1px solid rgba(74,124,89,0.85); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 20px rgba(74,124,89,0.25); }
     .btn-primary:disabled { background: #3b3b3b; border-color: #3b3b3b; color: #8d8d8d; cursor: not-allowed; transform: none; box-shadow: none; }
     .filter-btn { border: 1px solid var(--line); border-radius: 999px; transition: all 0.3s ease-in-out; font-size: 0.875rem; padding: 6px 16px; font-weight: 500; }
-    .filter-btn.active, .filter-btn:hover { background: rgba(124,255,77,0.2); color: var(--neon); border-color: rgba(124,255,77,0.4); }
-    #cart-drawer { position: fixed; top: 0; right: 0; height: 100%; width: 100%; max-width: 420px; background: #101010; z-index: 60; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--line); }
+    .filter-btn.active, .filter-btn:hover { background: rgba(74,124,89,0.15); color: var(--neon); border-color: rgba(74,124,89,0.4); }
+    #cart-drawer { position: fixed; top: 0; right: 0; height: 100%; width: 100%; max-width: 420px; background: #171310; z-index: 60; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--line); }
     #cart-drawer.open { transform: translateX(0); }
-    #mobile-menu { position: fixed; top: 0; right: 0; width: 280px; height: 100%; background: #0f0f0f; z-index: 50; padding: 1.5rem; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--line); }
+    #mobile-menu { position: fixed; top: 0; right: 0; width: 280px; height: 100%; background: #1E1A14; z-index: 50; padding: 1.5rem; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--line); }
     #mobile-menu.open { transform: translateX(0); }
-    .qty-input { border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; width: 60px; text-align: center; font-weight: 600; background: #171717; }
+    .qty-input { border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; width: 60px; text-align: center; font-weight: 600; background: #1E1A14; }
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.72); z-index: 70; display: flex; align-items: flex-end; justify-content: center; }
     @media (min-width: 640px) { .modal-overlay { align-items: center; } }
-    .modal-card { background: #111; border-radius: 24px 24px 0 0; padding: 2rem; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; border: 1px solid var(--line); }
+    .modal-card { background: #171310; border-radius: 24px 24px 0 0; padding: 2rem; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; border: 1px solid var(--line); }
     @media (min-width: 640px) { .modal-card { border-radius: 24px; } }
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(124,255,77,0.45), transparent); }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(74,124,89,0.35), transparent); }
     .qty-btn { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; border: 1px solid; transition: all 0.3s ease-in-out; cursor: pointer; }
     .qty-btn-minus { border-color: var(--line); color: #ddd; }
-    .qty-btn-minus:hover { background: #232323; color: var(--neon); }
+    .qty-btn-minus:hover { background: #232323; color: #6BAF84; }
     .qty-btn-plus { background: var(--amber); border-color: var(--amber); color: #141414; }
     .qty-btn-plus:hover { filter: brightness(1.05); }
     .product-description { position: relative; max-height: 2.6rem; overflow: hidden; transition: max-height 0.25s ease; }
-    .product-description::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1rem; background: linear-gradient(to bottom, rgba(17,17,17,0), #111); transition: opacity 0.2s; }
+    .product-description::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1rem; background: linear-gradient(to bottom, rgba(23,19,16,0), #171310); transition: opacity 0.2s; }
     .product-description.expanded { max-height: 12rem; }
     .product-description.expanded::after { opacity: 0; }
   </style>
@@ -86,7 +86,7 @@
       </a>
       <nav class="hidden lg:flex gap-8">
         <a href="index.html" class="font-medium text-text-mid hover:text-primary transition">Home</a>
-        <a href="products.html" class="font-bold text-primary border-b-2 border-yellow-400 pb-0.5">Products</a>
+        <a href="products.html" class="font-bold text-primary border-b-2 border-secondary pb-0.5">Products</a>
         <a href="index.html#reviews" class="font-medium text-text-mid hover:text-primary transition">Reviews</a>
         <a href="index.html#about" class="font-medium text-text-mid hover:text-primary transition">Our Story</a>
       </nav>
@@ -98,7 +98,7 @@
             <path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6l-2-2H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/>
           </svg>
           <span>Cart</span>
-          <span id="cart-count" class="absolute -top-2 -right-2 w-5 h-5 bg-yellow-400 text-black text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+          <span id="cart-count" class="absolute -top-2 -right-2 w-5 h-5 bg-secondary text-[#0E0C09] text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
         </button>
         <button onclick="toggleMenu()" class="lg:hidden p-2 text-primary">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,7 +184,7 @@
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
       <path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6l-2-2H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/>
     </svg>
-    <span id="float-cart-count" class="absolute -top-2 -right-2 w-5 h-5 bg-primary text-black text-xs font-bold rounded-full items-center justify-center hidden flex">0</span>
+    <span id="float-cart-count" class="absolute -top-2 -right-2 w-5 h-5 bg-primary text-[#0E0C09] text-xs font-bold rounded-full items-center justify-center hidden flex">0</span>
   </div>
 </button>
 
@@ -244,7 +244,7 @@
     if (cart.length === 0) { list.innerHTML = '<p class="text-center text-text-mid py-8">Your cart is empty.</p>'; return; }
     list.innerHTML = cart.map((item, i) => `
       <div class="flex gap-3 bg-bg-card rounded-xl p-3 border border-primary/10">
-        <img src="${item.imageUrl || 'https://placehold.co/80x80/2D6A2D/F5C518?text=P'}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0" onerror="this.src='https://placehold.co/80x80/2D6A2D/F5C518?text=P'">
+        <img src="${item.imageUrl || 'https://placehold.co/80x80/4A7C59/C49A3C?text=P'}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0" onerror="this.src='https://placehold.co/80x80/4A7C59/C49A3C?text=P'">
         <div class="flex-1 min-w-0">
           <p class="font-semibold text-sm truncate">${item.name}</p>
           <p class="text-primary font-bold text-sm">R${item.price} each</p>
@@ -266,7 +266,7 @@
     updateCartUI();
     // Flash feedback
     const btn = document.getElementById('add-btn-' + product.id);
-    if (btn) { btn.textContent = 'Added! ✓'; btn.style.background = '#7CFF4D'; btn.style.color = '#080808'; setTimeout(() => { btn.textContent = 'Add to Cart'; btn.style.background = ''; btn.style.color = ''; }, 1200); }
+    if (btn) { btn.textContent = 'Added! ✓'; btn.style.background = '#4A7C59'; btn.style.color = '#080808'; setTimeout(() => { btn.textContent = 'Add to Cart'; btn.style.background = ''; btn.style.color = ''; }, 1200); }
   }
 
   function changeQty(index, delta) {
@@ -306,11 +306,11 @@
       return `
         <div class="product-card ${!inStock ? 'out-of-stock' : ''}">
           <div class="relative">
-            <img src="${p.imageUrl || 'https://placehold.co/400x280/2D6A2D/F5C518?text=' + encodeURIComponent(p.name)}"
+            <img src="${p.imageUrl || 'https://placehold.co/400x280/4A7C59/C49A3C?text=' + encodeURIComponent(p.name)}"
                  alt="${p.name}" class="w-full h-36 sm:h-44 object-cover"
-                 onerror="this.src='https://placehold.co/400x280/2D6A2D/F5C518?text=Product'">
-            <span class="badge ${inStock ? 'bg-yellow-400 text-black' : 'bg-red-500 text-white'}">${inStock ? 'In Stock' : 'Sold Out'}</span>
-            ${p.category ? `<span class="absolute top-8 left-8 text-xs bg-primary/80 text-white px-2 py-0.5 rounded-full capitalize">${p.category}</span>` : ''}
+                 onerror="this.src='https://placehold.co/400x280/4A7C59/C49A3C?text=Product'">
+            <span class="badge ${inStock ? 'bg-secondary text-[#0E0C09]' : 'bg-red-500 text-white'}">${inStock ? 'In Stock' : 'Sold Out'}</span>
+            ${p.category ? `<span class="absolute top-8 left-8 text-xs bg-primary/80 text-[#F0EDE6] px-2 py-0.5 rounded-full capitalize">${p.category}</span>` : ''}
           </div>
           <div class="p-3 sm:p-4">
             <h3 class="font-semibold text-text-light text-sm leading-tight mb-1 line-clamp-2">${p.name}</h3>
